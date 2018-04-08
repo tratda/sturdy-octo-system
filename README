@@ -1,0 +1,51 @@
+The Web Script Server uses DOCKER and GIT in order to produce a turnkey 
+solution to Prompt #2. Requirements: DOCKER 
+
+
+Building the Enviroment:
+In order to use the Web Script Server, DOCKER must 
+be installed in your development enviroment. Once DOCKER is installed,
+move to the directory that this README is in and build the DOCKERFILE 
+with  the command:
+
+"docker build -t GIT_WEB_SCRIPTER ."
+
+This command tells docker to build the Dockerfile located in the 
+current directory and call it GIT_WEB_SCRIPTER.
+
+
+Running the Container:
+Once the Dockerfile is built, it is stored in your development enviroments
+local Docker image registry. It can be run in the foreground with the  
+command:
+
+"docker run -p 443:443 -p 22:22 GIT_WEB_SCRIPTER"
+
+Or it can be run in the background in detached mode with the command:
+
+"docker run -d -p 443:443 -p 22:22 GIT_WEB_SCRIPTER"
+
+Either way it will run mapping the ports of the local machine to 443 and 22 to
+the coresponding ports on the docker container. 
+
+In detached mode it can be stopped with the command:
+
+"docker container stop GIT_WEB_SCRIPTER"
+
+
+Executing scripts on the Container:
+
+Once the container is running you can interact with it via GIT and HTTPS.
+To place scripts to be run by the container on the server, you must clone
+the git repo to your local machine with the command:
+
+"git clone admin@localhost:admin"
+
+Place the scripts you want to run into this directory, commit the changes, 
+then push the repo back to the server with the commands:
+
+"git push"
+
+When a user browses to localhost on port 443, the webserver executes all the
+scripts in the git repo in the server and displays the output in the browser.
+
