@@ -12,6 +12,8 @@ app = Flask(__name__)
 #Exec all commands in the /web directory
 def command2exec():
     #Have git update the /web directory from the git repo
+    subprocess.run(["git", "-C", "/web", "reset", "--hard", "HEAD"])
+    subprocess.run(["git", "-C", "/web", "clean", "-f", "-d"])
     subprocess.run(["git", "-C", "/web", "pull"])
     #Pull the shell scripts out of the /web directory
     scripts = subprocess.run(["ls","/web/"], stdout=subprocess.PIPE).stdout.decode()

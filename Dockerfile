@@ -40,14 +40,6 @@ WORKDIR /app
 #place the app in the web app folder
 ADD . /app
 
-#make a folder for the web content. this folder will contain the local copy 
-#of the repo
-RUN mkdir /web
-
-#Insert placeholder text into the root web folder
-RUN echo '#!/bin/bash' > /web/sample.sh
-RUN echo 'echo "Place scripts in to Repo to see them here"' >> /web/sample.sh
-
 #install all dependencies
 RUN pip3 install -r Requirements.txt
 
